@@ -19,7 +19,7 @@
 
 
 
-def loadFile (filePath: str) -> dict[str, int]:
+def parseFileToDictionary (filePath: str) -> dict[str, int]:
     #Initializing empty dictionary to store category and minutes data
     categoryMinutes = {}
 
@@ -27,17 +27,19 @@ def loadFile (filePath: str) -> dict[str, int]:
         with open(filePath, 'r') as file:
 
             for line in file:
-                input = line.strip()
+                #Reading each line and taking away the white space 
+                text = line.strip()
 
-                if not input:
+                if not text:
                     continue
+
                 #Current regex is assumed to be " " and the category is one word
-                category, minutes = input.split()
+                category, minutes = text.split()
                 minutes = int(minutes)
                 
                 #Defaulting or updating the dictionary with the category
                 categoryMinutes[category] = categoryMinutes.get(category, 0) + minutes
-                
+
             # Sorting dictionary by minutes in descending order  
             categoryMinutes = dict(sorted(categoryMinutes.items(), key=lambda x: x[1], reverse=True))
 

@@ -6,26 +6,35 @@ cooking 25
 walking 10
 gaming 35
 exercise 20
+
+
+
+
+
 reading 15
 meditation 30
 coding 45
+
+
 cooking 25
 walking 10
 gaming 35
 exercise 20
+       
+reading 15
+meditation 30
+coding 45
+       
+cooking 25
+walking 10
+gaming 35
+exercise 20     
 reading 15
 meditation 30
 coding 45
 cooking 25
 walking 10
-gaming 35
-exercise 20
-reading 15
-meditation 30
-coding 45
-cooking 25
-walking 10
-gaming 35
+gaming 35          
 exercise 20
 reading 15
 meditation 30

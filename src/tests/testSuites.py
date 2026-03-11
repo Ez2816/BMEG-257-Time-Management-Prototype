@@ -1,24 +1,31 @@
 import unittest
-from datetime import datetime, timedelta
+
+from timeParser import parseFileToDictionary
 
 #TODO: Implement test suites for DHF 5
 # copilot set up general test suite structure for category parsing, time tracking, and priority verification
 
+filePath1 = "src\\tests\\file1.txt"
+filePath2 = "src\\tests\\file2.txt"
+filePath3 = "src\\tests\\file3.txt"
+# TODO: insert the hypothetical list of user priorities as an array
+
 class TestCategoryParsing(unittest.TestCase):
-    """Test suite for parsing time management categories"""
+    #Test suite for parsing time management categories
     
-    def test_parse_valid_category(self):
-        """Test parsing a valid category entry"""
-        # Add your category parsing logic here
-        pass
+    def test_parse1(self):
+        testDictionary = parseFileToDictionary(filePath1)
+        self.assertEqual(testDictionary, {'Work': 240, 'Exercise': 60, 'Leisure': 120})
     
-    def test_parse_invalid_category(self):
-        """Test parsing invalid category format"""
-        pass
+    def test_parse2(self):
+        testDictionary = parseFileToDictionary(filePath2)
+        self.assertEqual(len(testDictionary.keys()), 7)
+        
     
-    def test_parse_multiple_categories(self):
-        """Test parsing multiple categories"""
-        pass
+    def test_parse3(self):
+        testDictionary = parseFileToDictionary(filePath3)
+        self.assertEqual(len(testDictionary.keys()), 0)
+        
 
 
 
