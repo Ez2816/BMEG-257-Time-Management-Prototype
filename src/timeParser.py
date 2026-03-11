@@ -1,7 +1,13 @@
 # input: string which is the path to the file containing the category 
 # and minutes data from the backend
+
 # Output: a dictionary containing the category string as the key and the total minutes integer
 # the user spent on the category that week sorted in descending order of minutes spent
+ 
+#If the file is empty or the file does not exist, the function will throw a FileNotFoundError
+#If the file is empty, an empty dictionary will be returned
+
+
 # This function reads the backend ouput file then outputs a dictionary of the total number of 
 # minutes per each category. This function serves as the basis of data accumulation for analysis
 # from the direct activities of the user wristband and app
@@ -14,21 +20,30 @@
 
 
 def loadFile (filePath: str) -> dict[str, int]:
+    #Initializing empty dictionary to store category and minutes data
     categoryMinutes = {}
 
-    with open(filePath, 'r') as file:
+    try:
+        with open(filePath, 'r') as file:
 
-        for line in file:
-            input = line.strip()
+            for line in file:
+                input = line.strip()
 
-            if not input:
-                continue
+                if not input:
+                    continue
+                #Current regex is assumed to be " " and the category is one word
+                category, minutes = input.split()
+                minutes = int(minutes)
+                
+                #Defaulting or updating the dictionary with the category
+                categoryMinutes[category] = categoryMinutes.get(category, 0) + minutes
+                
+            # Sorting dictionary by minutes in descending order  
+            categoryMinutes = dict(sorted(categoryMinutes.items(), key=lambda x: x[1], reverse=True))
 
-            category, minutes = input.split()
-            minutes = int(minutes)
-            
-            categoryMinutes[category] = categoryMinutes.get(category, 0) + minutes
-            
-        categoryMinutes = dict(sorted(categoryMinutes.items(), key=lambda x: x[1], reverse=True))
+    except (FileNotFoundError, ValueError):
+        # Throwing Exception if file not found
+        raise FileNotFoundError("File not found or invalid file format")
+        
 
     return categoryMinutes
